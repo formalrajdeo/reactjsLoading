@@ -1,25 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react'
+import './index.css'
 
-function App() {
+const App = () => {
+  const [loading, setLoading] = useState(0)
+  useEffect(() => {
+    setLoading(1)
+  }, [])
+  console.log('loading ka value dekho  : ', loading)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      {loading === 1 && (
+        <div className='container'>
+          <span>Page 1</span>
+          <button className='btn' onClick={() => setLoading(2)}>
+            next
+          </button>
+        </div>
+      )}
+      {loading === 2 && (
+        <div className='container'>
+          <span>Page 2</span>
+          <div className='two-btn'>
+            <button className='btn' onClick={() => setLoading(1)}>
+              previous
+            </button>
+            <button className='btn ' onClick={() => setLoading(3)}>
+              next
+            </button>
+          </div>
+        </div>
+      )}
+      {loading === 3 && (
+        <div className='container'>
+          <span>Page 3</span>
+          <div className='two-btn'>
+            <button className='btn' onClick={() => setLoading(2)}>
+              previous
+            </button>
+            <button className='btn' onClick={() => setLoading(1)}>
+              Home
+            </button>
+          </div>
+        </div>
+      )}
+    </>
+  )
 }
 
-export default App;
+export default App
